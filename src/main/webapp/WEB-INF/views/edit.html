@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa thông tin bài hát</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container mt-5">
+    <h2>Sửa thông tin bài hát</h2>
+    <form action="/updateSong" method="post" enctype="multipart/form-data">
+        <!-- Hidden field for the ID to identify the song -->
+        <input type="hidden" name="id" th:value="${song.id}">
+
+        <div class="form-group">
+            <label for="nameAlbuml">Tên Album:</label>
+            <input type="text" class="form-control" id="nameAlbuml" name="nameAlbuml" th:value="${song.nameAlbuml}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Trạng thái:</label>
+            <select class="form-control" id="status" name="status">
+                <option value="true" th:selected="${song.status}">Hoạt động</option>
+                <option value="false" th:selected="${!song.status}">Không hoạt động</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="singer">Ca sĩ:</label>
+            <input type="text" class="form-control" id="singer" name="singer" th:value="${song.singer}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="content">Nội dung:</label>
+            <textarea class="form-control" id="content" name="content" rows="3" th:text="${song.content}" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="url">File nhạc:</label>
+            <input type="file" class="form-control-file" id="url" name="url">
+            <small class="form-text text-muted">Chọn file nếu bạn muốn cập nhật bài hát.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </form>
+</div>
+</body>
+
+</html>

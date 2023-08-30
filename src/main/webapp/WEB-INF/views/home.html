@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container mt-5">
+    <h2>Danh sách bài hát</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên album</th>
+            <th>Trạng thái</th>
+            <th>Ca sĩ</th>
+            <th>Nội dung</th>
+            <th>Phát nhạc</th>
+            <th>Thao tác</th> <!-- Column for edit and delete buttons -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="song : ${list}">
+            <td th:text="${song.id}"></td>
+            <td th:text="${song.nameAlbuml}"></td>
+            <td th:text="${song.status ? 'Hoạt động' : 'Không hoạt động'}"></td>
+            <td th:text="${song.singer}"></td>
+            <td th:text="${song.content}"></td>
+            <td>
+                <audio controls>
+                    <source th:src="${song.url}" type="audio/mpeg">
+                    Trình duyệt của bạn không hỗ trợ thẻ audio.
+                </audio>
+            </td>
+            <!-- Buttons for edit and delete actions -->
+            <td>
+                <a th:href="@{'/edit/' + ${song.id}}" class="btn btn-primary btn-sm">Sửa</a>
+                <a th:href="@{'/delete/' + ${song.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa bài hát này?')">Xóa</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
